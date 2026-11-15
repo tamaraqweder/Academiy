@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,8 +14,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
+        Schema::create('lectures', function (Blueprint $table) {
+              $table->id();
+              $table->foreignId('course_id') ->constrained('courses');
+              $table->string('topic_summary');
+             $table->string('hall_name');
+            $table->string('semester');
+            $table->timestamp('scheduled_at');
+
             $table->timestamps();
         });
     }
@@ -22,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('lectures');
     }
 };

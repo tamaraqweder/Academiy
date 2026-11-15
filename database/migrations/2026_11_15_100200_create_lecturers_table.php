@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,10 +12,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+       
         Schema::create('lecturers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+       $table->id();
+
+       $table->foreignId('user_id')->unique()->constrained('users');
+
+       $table->integer('employee_number');
+      $table->string('office_room');
+      $table->string('photo')->nullable();
+      $table->string('status')->default('active');
+
+       $table->timestamps();
+      });
     }
 
     /**
@@ -25,3 +35,6 @@ return new class extends Migration
         Schema::dropIfExists('lecturers');
     }
 };
+
+
+
